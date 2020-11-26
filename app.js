@@ -6,13 +6,9 @@ const itemsRouter = require("./routes/itemRouter.js");
 const homeRouter = require("./routes/homeRouter.js");
 const cors = require('./middleware/cors')
 
-// const models = require("./models");
-// const User = models.user;
-// const Todo = models.todo;
-
 const app = express();
 
-app.use(cors);
+app.use(cors); //для доступа к ответу на запрос из другого источника
 
 app.use(bodyParser.urlencoded({extended: true})); //добавляем плагин
 app.use(bodyParser.json()); //для генерации json объектов

@@ -3,13 +3,14 @@ import {NavLink} from "react-router-dom";
 import "./styles.css";
 import axios from "axios";
 
-class Login extends React.Component {
+class Auth extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: ''
     };
+    this.signUp = this.signUp.bind(this);
     this.signIn = this.signIn.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -28,9 +29,20 @@ class Login extends React.Component {
   }
 
   signIn() {
-    console.log('Email address is ' + this.state.email + ' Password is ' + this.state.password);
+    axios.post('/login', {
+      email: this.state.email,
+      password: this.state.password
+    })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
 
-    axios.post('http://localhost:5000/login', {
+  signUp() {
+    axios.post('/register', {
       email: this.state.email,
       password: this.state.password
     })
@@ -45,17 +57,11 @@ class Login extends React.Component {
   render() {
     return (
         <div id="main">
-          <div id="header">
-            <NavLink to="/">
-              <div id="logo">Todo</div>
-            </NavLink>
-            <div id="login_btns">
-              <NavLink to="/login" activeClassName="hurray">
-                <div id="log_btn">Login</div>
-              </NavLink>
-              <NavLink to="/register">
-                <div id="reg_btn">Register</div>
-              </NavLink>
+          <div id="lg">
+            <div id="header">
+                <NavLink to="/">
+                  <div id="logo">Todo</div>
+                </NavLink>
             </div>
           </div>
           <div id="block-form">
@@ -78,6 +84,7 @@ class Login extends React.Component {
                 />
               </div>
               <div className="button">
+                <input className="sign_up" type="button" onClick={this.signUp} value="Sing up"/>
                 <input className="btn_form" type="button" onClick={this.signIn} value="Come in"/>
               </div>
             </form>
@@ -87,4 +94,8 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Auth;
+
+
+
+

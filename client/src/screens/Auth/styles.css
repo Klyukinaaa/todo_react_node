@@ -4,9 +4,9 @@
 }
 
 #header {
+    height: 70px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 #logo {
@@ -113,6 +113,23 @@ a {
     font-family: Natural, sans-serif;
     font-size: 18px;
 
+}
+
+.sign_up {
+    outline:none;
+    border: none;
+    background-color: #6c8edd;
+    width: 120px;
+    height: 50px;
+    color: white;
+    font-family: Natural, sans-serif;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.sign_up:hover {
+    cursor: pointer;
+    background-color: #526ba5;
 }
 
 .btn_form:hover {

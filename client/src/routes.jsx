@@ -1,9 +1,7 @@
 import React from "react";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import Container from "./components/Container";
-import Login from "./screens/Login";
-import Register from "./screens/Register";
-import Main from "./screens/Main";
+import Auth from "./screens/Auth";
 
 function useRoutes(isAuthenticated) {
   if (isAuthenticated) {
@@ -12,20 +10,16 @@ function useRoutes(isAuthenticated) {
           <Route path="/items" exact>
             <Container/>
           </Route>
+          <Redirect to="/items"/>
         </Switch>
     )
   }
   return (
       <Switch>
         <Route path="/" exact>
-          <Main/>
+          <Auth/>
         </Route>
-        <Route path="/login" >
-          <Login/>
-        </Route>
-        <Route path="/register" >
-          <Register/>
-        </Route>
+        <Redirect to="/"/>
       </Switch>
   )
 }
