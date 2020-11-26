@@ -1,0 +1,24 @@
+.color_btns {
+    margin-right: 15px;
+}
+
+.color_btns {
+    display: flex;
+}
+
+.color_btns span {
+    border: 1px solid white;
+    border-radius: 2px;
+    height: 16px;
+    width: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2px;
+}
+
+.color_container {
+    display: flex;
+    align-items: center;
+    margin-right: 18px;
+}

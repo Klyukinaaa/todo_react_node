@@ -1,0 +1,42 @@
+li {
+    display: flex;
+    margin-bottom: 1px;
+}
+
+.checkbox {
+    background: grey;
+    width: 60px;
+    height: 60px;
+    margin-right: 1px;
+    border-radius: 2px 0 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.task {
+    background: #ec636b;
+    height: 60px;
+    width: 500px;
+    border-radius: 0 2px 2px 0;
+    color: #faf3fe;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    font-family: Natural, sans-serif;
+}
+
+li {
+    list-style-type: none;
+}
+
+.checkbox.checked_color, .task.checked_color {
+    background: #b1b1b1 !important;
+}
+
+label, #check {
+    cursor: pointer;
+}
+

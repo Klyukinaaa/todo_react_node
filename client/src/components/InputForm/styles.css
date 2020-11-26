@@ -1,0 +1,39 @@
+#text {
+    width: 586px;
+    height: 50px;
+    background: #fdfdfe;
+    border-radius: 5px;
+    border: 1px solid #d0d0ce;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new_item input {
+    height: 45px;
+    border: #eaf2f5;
+    outline: none;
+    border-radius: 5px;
+    padding-left: 18px;
+    font-size: 16px;
+    font-family: Natural, sans-serif;
+}
+
+.text_btn #add {
+    width: 70px;
+    height: 38px;
+    background: #2aa698;
+    border-radius: 2px;
+    border: none;
+    color: #eaf2f5;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+    font-family: Natural, sans-serif;
+}
+
+
+
+
+

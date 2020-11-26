@@ -1,0 +1,27 @@
+#button:focus {
+    outline: none;
+}
+
+.color_btns #button {
+    width: 16px;
+    height: 16px;
+    background: #fde087;
+    border-radius: 2px;
+    color: #eaf2f5;
+    cursor: pointer;
+    border: none;
+}
+
+.color_btns span.active {
+    border: 1px solid rgb(215, 199, 199);
+}
+
+.color_btns span.active #button {
+    border-radius: 0;
+    width: 14px;
+    height: 14px;
+}
+
+#button:focus {
+    outline: none;
+}

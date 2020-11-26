@@ -1,0 +1,11 @@
+.item {
+    margin: 1px;
+}
+
+ul.todo.item {
+    padding: 0;
+}
+
+ul {
+    padding: 0;
+}

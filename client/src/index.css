@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+}
+
+@font-face {
+    font-family: Natural;
+    src: url("./fonts/17651.ttf");
+}
+
+.page {
+    background-color: #eaf2f5;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 20px;
+}
+
+#container {
+    height: 900px;
+    padding: 20px 0 0 40px;
+    display: flex;
+    justify-content: center;
+}
+
