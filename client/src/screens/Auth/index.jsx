@@ -66,7 +66,7 @@ class Auth extends React.Component {
           </div>
           <div id="block-form">
             <form id="form" action="">
-              <div className="title_form">Sign in</div>
+              <div className="title_form">Authorization</div>
               <div className="date_form">
                 <input
                     className="date"
@@ -82,10 +82,11 @@ class Auth extends React.Component {
                     placeholder="Password"
                     onChange={this.handlePasswordChange}
                 />
+                {/*<span className="error">Тест</span>*/}
               </div>
               <div className="button">
-                <input className="sign_up" type="button" onClick={this.signUp} value="Sing up"/>
-                <input className="btn_form" type="button" onClick={this.signIn} value="Come in"/>
+                <input className="sign_up" type="button" onClick={this.signUp} value="Register"/>
+                <input className="btn_form" type="button" onClick={this.signIn} value="Login"/>
               </div>
             </form>
           </div>

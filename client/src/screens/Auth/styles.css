@@ -84,6 +84,7 @@ a {
 
 .date_form {
     margin-top: 10px;
+    position: relative;
 }
 
 .date {
@@ -135,6 +136,15 @@ a {
 .btn_form:hover {
     cursor: pointer;
     background-color: #228479;
+}
+
+.error {
+    position: absolute;
+    top:160px;
+    left: 0;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 

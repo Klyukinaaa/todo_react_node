@@ -1,10 +1,20 @@
 const jwt = require("jsonwebtoken");
 const db = require("../models/index");
+const {validationResult} = require("express-validator");
 const keys = require("../config/keys");
 const User = db.user;
 const errorHandler = require("../utils/errorHandler");
 
 module.exports.login = async function (request, response) {
+    const errors = validationResult(request);
+
+    if (!errors.isEmpty()) { //если есть ошибка
+        return response.status(400).json({
+            errors: errors.array(),
+            message: "Invalid login data."
+        })
+    }
+
     const email = request.body.email;
     const password = request.body.password;
 
@@ -39,6 +49,15 @@ module.exports.login = async function (request, response) {
 };
 
 module.exports.register = async function (request, response) {
+    const errors = validationResult(request);
+
+    if (!errors.isEmpty()) { //если есть ошибка
+        return response.status(400).json({
+            errors: errors.array(),
+            message: "Incorrect registration data."
+        })
+    }
+
     //email password
     const email = request.body.email;
     const password = request.body.password;
@@ -62,14 +81,3 @@ module.exports.register = async function (request, response) {
         }
     }
 }
-
-
-
-
-
-// User.create({
-//     email: email,
-//     password: password
-// }).then((result) => {
-//     response.status(201).json(result);
-// }).catch(err => errorHandler(response, err)); //обработать ошибку
