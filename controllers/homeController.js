@@ -53,7 +53,6 @@ module.exports.register = async function (request, response) {
 
     if (!errors.isEmpty()) { //если есть ошибка
         return response.status(400).json({
-            errors: errors.array(),
             message: "Incorrect registration data."
         })
     }

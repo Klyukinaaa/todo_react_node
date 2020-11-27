@@ -5,7 +5,7 @@ import './styles.css';
 
 function ItemColor(props) {
   const {
-    i, item, clickColor, click,
+    i, item, clickColor, click
   } = props;
   return (
     <span role="presentation" className={`btn ${click ? 'active' : ' '}`} onClick={() => clickColor(i)}>
