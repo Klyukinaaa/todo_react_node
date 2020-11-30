@@ -10,7 +10,7 @@ function ColorBtns(props) {
     <ItemColor
       click={item.selected}
       clickColor={handleClickColor}
-      key={item.key}
+      key={index}
       i={index}
       item={item}
     />

@@ -11,17 +11,14 @@ class Container extends React.Component {
         {
           backgroundColor: '#ef666c',
           selected: false,
-
         },
         {
           backgroundColor: '#f171a2',
           selected: false,
-
         },
         {
           backgroundColor: '#8f6ac8',
           selected: false,
-
         },
         {
           backgroundColor: '#5eb1f3',
@@ -31,7 +28,6 @@ class Container extends React.Component {
         {
           backgroundColor: '#68d8e3',
           selected: false,
-
         },
         {
           backgroundColor: '#fde087',

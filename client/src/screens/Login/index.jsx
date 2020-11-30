@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {NavLink} from "react-router-dom";
 import Input from "../Input";
 
-function Form(props) {
+function Login(props) {
   const {
     handleEmailChange,
     handlePasswordChange,
@@ -48,4 +48,4 @@ Input.propTypes = {
   signIn: PropTypes.func,
 };
 
-export default Form;
+export default Login;
