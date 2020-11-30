@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 function Input(props) {
-  const { handleEmailChange, handlePasswordChange} = props;
+  const {handleEmailChange, handlePasswordChange} = props;
   return (
       <div>
         <input

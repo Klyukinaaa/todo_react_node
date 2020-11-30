@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
 const db = require("../models/index");
 const {validationResult} = require("express-validator");
 const keys = require("../config/keys");
 const User = db.user;
 const errorHandler = require("../utils/errorHandler");
+
 
 module.exports.login = async function (request, response) {
     const errors = validationResult(request);
@@ -23,8 +25,10 @@ module.exports.login = async function (request, response) {
 
     if (candidate) {
         //проверка пароля
-        const passwordResult = password === candidate.password;
-        if (passwordResult) {
+        //const passwordResult = password === candidate.password;
+        //сравнение захеширован. паролей
+        const isMatch = await bcrypt.compare(password, candidate.password)
+        if (isMatch) {
             //генерация токена, пароли совпали
             const token = jwt.sign({ // метод авторизации
                 email: candidate.email, //объект, который хотим зашифровать в токене
@@ -37,7 +41,7 @@ module.exports.login = async function (request, response) {
         } else {
             //пароли не совпали
             response.status(401).json({
-                message: "Passwords do not match. Try again."
+                message: "Invalid login data."
             })
         }
     } else {
@@ -70,9 +74,10 @@ module.exports.register = async function (request, response) {
         })
     } else { //создание нового пользователя
         try {
+            const hashedPassword = await bcrypt.hash(password, 12); //хэширование пароля
             const user = await User.create({
                 email: email,
-                password: password
+                password: hashedPassword
             });
             response.status(201).json(user);
         } catch (err) {

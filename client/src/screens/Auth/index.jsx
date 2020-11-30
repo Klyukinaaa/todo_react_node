@@ -1,9 +1,9 @@
 import React from "react";
-import {NavLink, Redirect, Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import "./styles.css";
 import axios from "axios";
-import Input from "../Input";
 import Container from "../../components/Container";
+import Form from "../Form";
 
 class Auth extends React.Component {
   constructor(props) {
@@ -11,8 +11,7 @@ class Auth extends React.Component {
     this.state = {
       email: '',
       password: '',
-      errorLog: '',
-      errorReg: '',
+      error: '',
       token: '',
       isAuth: false
     };
@@ -41,18 +40,15 @@ class Auth extends React.Component {
     })
         .then(res => {
           this.setState({
-            errorLog: '',
-            errorReg: '',
+            error: '',
             token: res.data.token,
             isAuth: true
           });
           localStorage.setItem('token', res.data.token);
-          console.log(res);
         })
         .catch(err => {
           this.setState({
-            errorLog: err.response.data.message,
-            errorReg: ''
+            error: err.response.data.message,
           });
           console.log(err);
         });
@@ -65,17 +61,13 @@ class Auth extends React.Component {
     })
         .then(res => {
           this.setState({
-            errorReg: '',
-            errorLog: ''
+            error: '',
           });
           console.log(res);
         })
         .catch(err => {
-          console.log(err.response.data.message);
-          console.log(err)
           this.setState({
-            errorReg: err.response.data.message,
-            errorLog: '',
+            error: err.response.data.message,
           });
         });
   }
@@ -94,32 +86,12 @@ class Auth extends React.Component {
     return (
         <Switch>
           <Route path="/" exact>
-            <div id="main">
-              <div id="lg">
-                <div id="header">
-                  <NavLink to="/">
-                    <div id="logo">Todo</div>
-                  </NavLink>
-                </div>
-              </div>
-              <div id="block-form">
-                <form id="form" action="">
-                  <div className="title_form">Authorization</div>
-                  <div className="date_form">
-                    <Input
-                        handleEmailChange={this.handleEmailChange}
-                        handlePasswordChange={this.handlePasswordChange}
-                    />
-                    <span className="error">{this.state.errorLog}</span>
-                    <span className="error">{this.state.errorReg}</span>
-                  </div>
-                  <div className="button">
-                    <input className="sign_up" type="button" onClick={this.signUp} value="Sign up"/>
-                    <input className="btn_form" type="button" onClick={this.signIn} value="Login"/>
-                  </div>
-                </form>
-              </div>
-            </div>
+            <Form handleEmailChange={this.handleEmailChange}
+                  handlePasswordChange={this.handlePasswordChange}
+                  error={this.state.error}
+                  signUp={this.signUp}
+                  signIn={this.signIn}
+            />
           </Route>
           <Redirect to="/"/>
         </Switch>
