@@ -42,9 +42,8 @@ class Auth extends React.Component {
           this.setState({
             error: '',
             isAuth: true,
-            token: res.data.token
+            token: localStorage.setItem('token', res.data.token)
           });
-          localStorage.setItem('token', this.state.token);
         })
         .catch(err => {
           this.setState({
@@ -79,19 +78,25 @@ class Auth extends React.Component {
 
   render() {
     return (
-          <Switch>
-            {this.state.isAuth ? <Route path="/items" exact component={Container} /> : null}
-            {this.state.isAuth ? <Redirect to="/items"/> : null}
-            <Route path='/'>
-              <Login
-                  handleEmailChange={this.handleEmailChange}
-                  handlePasswordChange={this.handlePasswordChange}
-                  error={this.state.error}
-                  signUp={this.signUp}
-                  signIn={this.signIn}
-              />
-            </Route>
-          </Switch>
+        <Switch>
+          {this.state.isAuth || localStorage.getItem('token')
+              ? <Route path="/items">
+                  <Container logout={this.logout} />
+                </Route>
+              : null}
+          {this.state.isAuth
+              ? <Redirect to="/items"/>
+              : null}
+          <Route path='/'>
+            <Login
+                handleEmailChange={this.handleEmailChange}
+                handlePasswordChange={this.handlePasswordChange}
+                error={this.state.error}
+                signUp={this.signUp}
+                signIn={this.signIn}
+            />
+          </Route>
+        </Switch>
     )
   }
 }

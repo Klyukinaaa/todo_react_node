@@ -42,10 +42,15 @@ class Container extends React.Component {
         color: '',
       },
     };
+    this.logout = this.logout.bind(this);
     this.handleChange = this.handleChange.bind(this); // создает новую функцию, с новым контекстом
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleClickColor = this.handleClickColor.bind(this);
+  }
+
+  logout() {
+    localStorage.removeItem('token')
   }
 
   handleClickColor(i) {
@@ -106,21 +111,31 @@ class Container extends React.Component {
   render() {
     const { currentItem, items, colors } = this.state;
     return (
-      <div id="container">
-        <div className="page">
-          <ItemsList
-            handleCheck={this.handleCheck}
-            items={items}
-          />
-          <InputForm
-            handleSubmit={this.handleSubmit}
-            inputValue={currentItem.value}
-            onChange={this.handleChange}
-            colors={colors}
-            handleClickColor={this.handleClickColor}
-          />
+        <div>
+          <div id="main">
+            <div id="lg">
+              <div id="header">
+                <div id="logo">Todo</div>
+                <input onClick={this.logout} className="logout" type="button"  value="Logout"/>
+              </div>
+            </div>
+          </div>
+          <div id="container">
+            <div className="page">
+              <ItemsList
+                  handleCheck={this.handleCheck}
+                  items={items}
+              />
+              <InputForm
+                  handleSubmit={this.handleSubmit}
+                  inputValue={currentItem.value}
+                  onChange={this.handleChange}
+                  colors={colors}
+                  handleClickColor={this.handleClickColor}
+              />
+            </div>
+          </div>
         </div>
-      </div>
     );
   }
 }

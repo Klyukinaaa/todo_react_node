@@ -20,3 +20,19 @@ body {
     justify-content: center;
 }
 
+.logout {
+    outline:none;
+    border: none;
+    background-color: #6c8edd;
+    width: 120px;
+    height: 70px;
+    color: white;
+    font-family: Natural, sans-serif;
+    font-size: 18px;
+}
+
+.logout:hover {
+    cursor: pointer;
+    background-color: #526ba5;
+}
+
