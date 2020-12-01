@@ -15,6 +15,7 @@ class Auth extends React.Component {
       isAuth: false,
       token: null
     };
+    this.logout = this.logout.bind(this);
     this.signUp = this.signUp.bind(this);
     this.signIn = this.signIn.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -57,6 +58,7 @@ class Auth extends React.Component {
     this.setState({
       isAuth: false
     });
+    localStorage.removeItem('token');
   }
 
   signUp() {
@@ -80,7 +82,7 @@ class Auth extends React.Component {
     return (
         <Switch>
           {this.state.isAuth || localStorage.getItem('token')
-              ? <Route path="/items">
+              ? <Route path="/items" exact>
                   <Container logout={this.logout} />
                 </Route>
               : null}

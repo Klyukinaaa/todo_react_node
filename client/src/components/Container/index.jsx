@@ -1,6 +1,7 @@
 import React from 'react';
 import ItemsList from '../ItemsList';
 import InputForm from '../InputForm';
+import axios from "axios";
 
 class Container extends React.Component {
   constructor(props) {
@@ -42,19 +43,15 @@ class Container extends React.Component {
         color: '',
       },
     };
-    this.logout = this.logout.bind(this);
+    this.createItem = this.createItem.bind(this);
     this.handleChange = this.handleChange.bind(this); // создает новую функцию, с новым контекстом
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleClickColor = this.handleClickColor.bind(this);
   }
 
-  logout() {
-    localStorage.removeItem('token')
-  }
-
   handleClickColor(i) {
-    const { colors } = this.state;
+    const {colors} = this.state;
     const newColors = [...colors];
     this.setState({
       colors: newColors.map((item, index) => {
@@ -76,7 +73,7 @@ class Container extends React.Component {
   }
 
   handleSubmit(event) {
-    const { currentItem, items, colors } = this.state;
+    const {currentItem, items, colors} = this.state;
     event.preventDefault(); // отменим стандартное поведение браузера
     const newItem = currentItem;
     const newColors = [...colors];
@@ -97,7 +94,7 @@ class Container extends React.Component {
   }
 
   handleCheck(id) {
-    const { items } = this.state;
+    const {items} = this.state;
     const newItems = [...items];
     const item = items.find((el) => el.id === id);
     if (item) {
@@ -108,15 +105,28 @@ class Container extends React.Component {
     });
   }
 
+  createItem() {
+    axios.post('/items/', {
+      task: this.state.currentItem.value,
+      completed: this.state.currentItem.checked
+    })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  }
+
   render() {
-    const { currentItem, items, colors } = this.state;
+    const {currentItem, items, colors} = this.state;
     return (
         <div>
           <div id="main">
             <div id="lg">
               <div id="header">
                 <div id="logo">Todo</div>
-                <input onClick={this.logout} className="logout" type="button"  value="Logout"/>
+                <input onClick={this.props.logout} className="logout" type="button" value="Logout"/>
               </div>
             </div>
           </div>
@@ -127,6 +137,7 @@ class Container extends React.Component {
                   items={items}
               />
               <InputForm
+                  createItem={this.createItem}
                   handleSubmit={this.handleSubmit}
                   inputValue={currentItem.value}
                   onChange={this.handleChange}

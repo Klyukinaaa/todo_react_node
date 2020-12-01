@@ -6,7 +6,7 @@ import './styles.css';
 
 function InputForm(props) {
   const {
-    handleSubmit, inputValue, onChange, colors, handleClickColor,
+    handleSubmit, inputValue, onChange, colors, handleClickColor, createItem,
   } = props;
   return (
     <form id="text" onSubmit={handleSubmit}>
@@ -22,6 +22,7 @@ function InputForm(props) {
         />
       </label>
       <ColorBtns
+        createItem={createItem}
         colors={colors}
         handleClickColor={handleClickColor}
       />

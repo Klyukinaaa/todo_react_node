@@ -36,7 +36,7 @@ module.exports.login = async function (request, response) {
             }, keys.jwt, {expiresIn: 60 * 60});
 
             response.status(200).json({
-                token: token                       // (`Bearer`)
+                token: token                      // (`Bearer`)
             })
         } else {
             //пароли не совпали

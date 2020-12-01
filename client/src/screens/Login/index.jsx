@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Input from "../Input";
 
 function Login(props) {
@@ -30,7 +30,7 @@ function Login(props) {
               />
               <span className="error">{error}</span>
             </div>
-            <div className="button">
+            <div className="buttons">
               <input className="sign_up" type="button" onClick={signUp} value="Sign up"/>
               <input className="btn_form" type="button" onClick={signIn} value="Login"/>
             </div>

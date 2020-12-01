@@ -9,7 +9,7 @@ function ItemColor(props) {
   } = props;
   return (
     <span role="presentation" className={`btn ${click ? 'active' : ' '}`} onClick={() => clickColor(i)}>
-      <input id="button" type="button" style={{ backgroundColor: item.backgroundColor }} />
+      <input className="button" type="button" style={{ backgroundColor: item.backgroundColor }} />
     </span>
   );
 }
