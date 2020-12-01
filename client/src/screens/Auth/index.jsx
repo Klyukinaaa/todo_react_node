@@ -3,8 +3,6 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import "./styles.css";
 import axios from "axios";
 import Container from "../../components/Container";
-import Form from "../Login";
-import PrivateRoute from "../../routes";
 import Login from "../Login";
 
 class Auth extends React.Component {
@@ -41,11 +39,12 @@ class Auth extends React.Component {
       password: this.state.password
     })
         .then(res => {
-          localStorage.setItem('token', res.data.token);
           this.setState({
             error: '',
-            isAuth: true
+            isAuth: true,
+            token: res.data.token
           });
+          localStorage.setItem('token', this.state.token);
         })
         .catch(err => {
           this.setState({
@@ -80,37 +79,21 @@ class Auth extends React.Component {
 
   render() {
     return (
-        <Route path="/">
-          {this.state.isAuth === true ? (
-          <Redirect to="/items"/>
-          ) : (
-              <Login handleEmailChange={this.handleEmailChange}
-                    handlePasswordChange={this.handlePasswordChange}
-                    error={this.state.error}
-                    signUp={this.signUp}
-                    signIn={this.signIn}
+          <Switch>
+            {this.state.isAuth ? <Route path="/items" exact component={Container} /> : null}
+            {this.state.isAuth ? <Redirect to="/items"/> : null}
+            <Route path='/'>
+              <Login
+                  handleEmailChange={this.handleEmailChange}
+                  handlePasswordChange={this.handlePasswordChange}
+                  error={this.state.error}
+                  signUp={this.signUp}
+                  signIn={this.signIn}
               />
-          )}
-        </Route>
+            </Route>
+          </Switch>
     )
   }
 }
 
 export default Auth;
-
-// <Switch>
-//   <Route path="/">
-//     {this.state.isAuth === false ? (
-//
-//     ) : (
-//         <Form handleEmailChange={this.handleEmailChange}
-//               handlePasswordChange={this.handlePasswordChange}
-//               error={this.state.error}
-//               signUp={this.signUp}
-//               signIn={this.signIn}
-//         />
-//     )}
-//   </Route>
-//   <Route path="/items" exact component={Container}/>
-//   <Route path="/login" exact component={Container}/>
-// </Switch>

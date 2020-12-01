@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import './index.css';
-import {MainRouter} from "./routes";
+import Auth from "./screens/Auth";
 
 export function App() {
   return (
       <Router>
-        <MainRouter/>
+          <Auth/>
       </Router>
   )
 }
