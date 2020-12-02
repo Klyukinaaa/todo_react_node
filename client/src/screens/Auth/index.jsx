@@ -1,106 +1,81 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
 import "./styles.css";
 import axios from "axios";
 import Container from "../../components/Container";
 import Login from "../Login";
 
-class Auth extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      error: '',
-      isAuth: false,
-      token: null
-    };
-    this.logout = this.logout.bind(this);
-    this.signUp = this.signUp.bind(this);
-    this.signIn = this.signIn.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+function Auth(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isAuth, setIsAuth] = useState(false);
+  const [token, setToken] = useState(null);
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value)
   }
 
-  handleEmailChange(e) {
-    this.setState({
-      email: e.target.value
-    })
+  function handlePasswordChange(e) {
+    setPassword(e.target.value)
   }
 
-  handlePasswordChange(e) {
-    this.setState({
-      password: e.target.value,
-    })
-  }
-
-  signIn() {
+  function signIn() {
     axios.post('/login', {
-      email: this.state.email,
-      password: this.state.password
+      email: email,
+      password: password
     })
         .then(res => {
-          this.setState({
-            error: '',
-            isAuth: true,
-            token: localStorage.setItem('token', res.data.token)
-          });
+          setError('');
+          setIsAuth(true);
+          setToken(localStorage.setItem('token', res.data.token));
         })
         .catch(err => {
-          this.setState({
-            error: err.response.data.message,
-          });
+          setError(err.response.data.message)
           console.log(err);
         });
   }
 
-  logout() {
-    this.setState({
-      isAuth: false
-    });
+  function logout() {
+    setIsAuth(false);
     localStorage.removeItem('token');
   }
 
-  signUp() {
+  function signUp() {
     axios.post('/register', {
-      email: this.state.email,
-      password: this.state.password
+      email: email,
+      password: password
     })
         .then(res => {
-          this.setState({
-            error: '',
-          });
+          setError('');
+          console.log(res)
         })
         .catch(err => {
-          this.setState({
-            error: err.response.data.message,
-          });
+          setError(err.response.data.message)
         });
   }
 
-  render() {
-    return (
-        <Switch>
-          {this.state.isAuth || localStorage.getItem('token')
-              ? <Route path="/items" exact>
-                  <Container logout={this.logout} />
-                </Route>
-              : null}
-          {this.state.isAuth
-              ? <Redirect to="/items"/>
-              : null}
-          <Route path='/'>
-            <Login
-                handleEmailChange={this.handleEmailChange}
-                handlePasswordChange={this.handlePasswordChange}
-                error={this.state.error}
-                signUp={this.signUp}
-                signIn={this.signIn}
-            />
-          </Route>
-        </Switch>
-    )
-  }
+  return (
+      <Switch>
+        { isAuth || localStorage.getItem('token')
+            ? <Route path="/items" exact>
+              <Container logout={logout}/>
+            </Route>
+            : null}
+        { isAuth
+            ? <Redirect to="/items"/>
+            : null}
+        <Route path='/'>
+          <Login
+              handleEmailChange={handleEmailChange}
+              handlePasswordChange={handlePasswordChange}
+              error={error}
+              signUp={signUp}
+              signIn={signIn}
+          />
+        </Route>
+      </Switch>
+  )
 }
 
 export default Auth;
