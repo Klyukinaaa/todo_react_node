@@ -109,6 +109,10 @@ class Container extends React.Component {
     axios.post('/items/', {
       task: this.state.currentItem.value,
       completed: this.state.currentItem.checked
+    }, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
     })
         .then(res => {
           console.log(res);
