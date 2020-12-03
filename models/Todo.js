@@ -19,6 +19,9 @@ module.exports = function (sequelize) {
         completed: {
             type: Sequelize.BOOLEAN,
             allowNull: false
+        },
+        color: {
+            type: Sequelize.STRING,
         }
     })
 }

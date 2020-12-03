@@ -23,7 +23,8 @@ module.exports.create = async function (request, response) {
         const item = await Item.create({
             user: request.user.id,
             task: request.body.task,
-            completed: request.body.completed
+            completed: request.body.completed,
+            color: request.body.color
         });
         response.status(201).json(item);
     } catch (err) {

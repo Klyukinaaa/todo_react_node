@@ -5,14 +5,15 @@ import TodoItem from '../TodoItem';
 import './styles.css';
 
 function ItemsList(props) {
-  const { items, handleCheck } = props;
+  const { items, handleCheck, deleteItem } = props;
   const listItems = items.map((item) => (
     <TodoItem
       color={item.color}
-      check={item.checked}
+      check={item.completed}
       onclick={handleCheck}
       id={item.id}
-      text={item.value}
+      text={item.task}
+      deleteItem={deleteItem}
     />
   ));
   return (

@@ -6,27 +6,32 @@ import './styles.css';
 
 function InputForm(props) {
   const {
-    handleSubmit, inputValue, onChange, colors, handleClickColor, createItem,
+    handleSubmit,
+    inputValue,
+    onChange,
+    colors,
+    handleClickColor,
+    createItem,
   } = props;
   return (
-    <form id="text" onSubmit={handleSubmit}>
-      <label htmlFor="add" className="new_item">
-        <input
-          value={inputValue}
-          onChange={onChange}
-          id="new-task"
-          maxLength="100"
-          type="text"
-          size="35"
-          placeholder="Add New Item"
-        />
-      </label>
-      <ColorBtns
-        createItem={createItem}
-        colors={colors}
-        handleClickColor={handleClickColor}
-      />
-    </form>
+      <form id="text" onSubmit={handleSubmit}>
+          <label htmlFor="add" className="new_item">
+            <input
+                onChange={onChange}
+                value={inputValue}
+                id="new-task"
+                maxLength="100"
+                type="text"
+                size="35"
+                placeholder="Add New Item"
+            />
+          </label>
+          <ColorBtns
+              createItem={createItem}
+              colors={colors}
+              handleClickColor={handleClickColor}
+          />
+      </form>
   );
 }
 

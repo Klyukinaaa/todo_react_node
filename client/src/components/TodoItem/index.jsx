@@ -5,7 +5,7 @@ import './styles.css';
 
 function TodoItem(props) {
   const {
-    text, check, onclick, id, color,
+    text, check, onclick, id, color, deleteItem
   } = props;
 
   const style = {
@@ -17,14 +17,15 @@ function TodoItem(props) {
 
   const itemStyle = check ? styleCheck : style;
   return (
-    <li>
-      <div className="checkbox" style={itemStyle}>
-        <input id={id} type="checkbox" onChange={() => onclick(id)} />
-      </div>
-      <label style={itemStyle} htmlFor={id} className="task">
-        {text}
-      </label>
-    </li>
+      <li>
+        <div className="checkbox" style={itemStyle}>
+          <input id={id} type="checkbox" onChange={() => onclick(id)}/>
+        </div>
+          <label style={itemStyle} htmlFor={id} className="task">
+            <span>{text}</span>
+            <button onClick={deleteItem} className="btn_delete">delete</button>
+          </label>
+      </li>
   );
 }
 

@@ -9,7 +9,7 @@ function Login(props) {
     handlePasswordChange,
     error,
     signUp,
-    signIn
+    signIn,
   } = props;
   return (
       <div id="main">

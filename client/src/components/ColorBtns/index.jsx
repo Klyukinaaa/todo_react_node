@@ -13,6 +13,7 @@ function ColorBtns(props) {
       key={index}
       i={index}
       item={item}
+      createItem
     />
   ));
 

@@ -48,7 +48,7 @@ function Auth(props) {
     })
         .then(res => {
           setError('');
-          console.log(res)
+          console.log(token)
         })
         .catch(err => {
           setError(err.response.data.message)
@@ -57,12 +57,12 @@ function Auth(props) {
 
   return (
       <Switch>
-        { isAuth || localStorage.getItem('token')
-            ? <Route path="/items" exact>
+        {isAuth || localStorage.getItem('token')
+            ? <Route path="/items"  exact>
               <Container logout={logout}/>
             </Route>
             : null}
-        { isAuth
+        {isAuth
             ? <Redirect to="/items"/>
             : null}
         <Route path='/'>

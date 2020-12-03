@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ItemsList from '../ItemsList';
 import InputForm from '../InputForm';
 import axios from "axios";
@@ -34,9 +34,9 @@ function Container(props) {
   ]);
 
   const [currentItem, setCurrentItem] = useState({
-    value: '',
-    checked: false,
     id: '',
+    task: '',
+    completed: false,
     color: '',
   });
 
@@ -53,28 +53,57 @@ function Container(props) {
     );
   }
 
+  function removeClick() {
+    setColors([
+      {
+        backgroundColor: '#ef666c',
+        selected: false,
+      },
+      {
+        backgroundColor: '#f171a2',
+        selected: false,
+      },
+      {
+        backgroundColor: '#8f6ac8',
+        selected: false,
+      },
+      {
+        backgroundColor: '#5eb1f3',
+        selected: false,
+      },
+      {
+        backgroundColor: '#68d8e3',
+        selected: false,
+      },
+      {
+        backgroundColor: '#fde087',
+        selected: false,
+      },
+    ])
+  }
+
   function handleChange(event) {
+    const newColors = [...colors];
+    const activeCheckbox = newColors.find((item) => item.selected);
+    const activeColor = activeCheckbox ? activeCheckbox.backgroundColor : newColors[Math.floor(Math.random() * 6)].backgroundColor;
     setCurrentItem({
-      value: event.target.value,
-      checked: false,
+      task: event.target.value,
+      completed: false,
       id: Date.now(),
+      color: activeColor
     });
   }
 
   function handleSubmit(event) {
     event.preventDefault(); // отменим стандартное поведение браузера
-    const newItem = currentItem;
-    const newColors = [...colors];
-    const activeCheckbox = newColors.find((item) => item.selected);
-    const activeColor = activeCheckbox ? activeCheckbox.backgroundColor : newColors[Math.floor(Math.random() * 6)].backgroundColor;
-    if (newItem.value !== '') {
-      newItem.color = activeColor;
-      const newItems = [...items, newItem];
+    if (currentItem.task !== '') {
+      const newItems = [...items, currentItem];
       setItems(newItems);
       setCurrentItem({
-        value: '',
-        checked: false,
+        task: '',
+        completed: false,
         id: '',
+        color: ''
       })
     }
   }
@@ -83,20 +112,48 @@ function Container(props) {
     const newItems = [...items];
     const item = items.find((el) => el.id === id);
     if (item) {
-      item.checked = !item.checked;
+      item.completed = !item.completed;
     }
-    setItems( newItems);
+    setItems(newItems);
   }
 
   function createItem() {
     axios.post('/items/', {
-      task: currentItem.value,
-      completed: currentItem.checked
+      task: currentItem.task,
+      completed: currentItem.completed,
+      color: currentItem.color
     }, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  }
+
+  useEffect(() => {
+    axios.get('/items/', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+        .then(res =>
+            setItems(res.data)
+        )
+        .catch(err => {
+          console.log(err);
+        });
+  }, [])
+
+  function deleteItem() {
+    axios.delete('/items/:id', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }})
         .then(res => {
           console.log(res);
         })
@@ -118,17 +175,20 @@ function Container(props) {
         <div id="container">
           <div className="page">
             <ItemsList
+                deleteItem={deleteItem}
                 handleCheck={handleCheck}
                 items={items}
             />
             <InputForm
                 createItem={createItem}
                 handleSubmit={handleSubmit}
-                inputValue={currentItem.value}
+                inputValue={currentItem.task}
                 onChange={handleChange}
                 colors={colors}
                 handleClickColor={handleClickColor}
             />
+            <div onClick={removeClick} className="remove">
+            </div>
           </div>
         </div>
       </div>
