@@ -55,4 +55,8 @@ label, #check {
     margin-right: 10px;
 }
 
+.btn_delete:hover {
+    background-color: #293593;
+}
+
 

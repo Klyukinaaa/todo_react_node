@@ -23,7 +23,7 @@ function TodoItem(props) {
         </div>
           <label style={itemStyle} htmlFor={id} className="task">
             <span>{text}</span>
-            <button onClick={deleteItem} className="btn_delete">delete</button>
+            <button onClick={() => deleteItem(id)} className="btn_delete">delete</button>
           </label>
       </li>
   );

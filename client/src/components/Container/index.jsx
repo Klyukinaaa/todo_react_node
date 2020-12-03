@@ -142,18 +142,19 @@ function Container(props) {
       }
     })
         .then(res =>
-            setItems(res.data)
+            setItems(res.data),
         )
         .catch(err => {
           console.log(err);
         });
-  }, [])
+  }, [items.length])
 
-  function deleteItem() {
-    axios.delete('/items/:id', {
+  function deleteItem(id) {
+    axios.delete(`/items/${id}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }})
+      },
+    })
         .then(res => {
           console.log(res);
         })
@@ -161,6 +162,7 @@ function Container(props) {
           console.log(err);
         });
   }
+
 
   return (
       <div>
