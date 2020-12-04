@@ -5,9 +5,10 @@ import TodoItem from '../TodoItem';
 import './styles.css';
 
 function ItemsList(props) {
-  const { items, handleCheck, deleteItem } = props;
+  const { items, handleCheck, deleteItem, handleText } = props;
   const listItems = items.map((item) => (
     <TodoItem
+      handleText={handleText}
       key={item.id}
       color={item.color}
       check={item.completed}

@@ -52,6 +52,7 @@ function Container(props) {
         console.log(e)
       }
     }
+
     requestItems();
   }, [])
 
@@ -69,17 +70,31 @@ function Container(props) {
     }
   }
 
-  // async function patchItem(id) {
-  //   try {
-  //       const item = {
-  //         task: currentItem.task,
-  //         completed: currentItem.completed
-  //       }
-  //       await itemsService.patchItem(id,item)
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
+  async function handleCheck(id) {
+    try {
+      const item = items.find((el) => el.id === id);
+      if (item) {
+        item.completed = !item.completed;
+      }
+      await itemsService.patchItem(id, item)
+      setItems([...items])
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  async function handleText(id, event) {
+    try {
+      const item = items.find((el) => el.id === id);
+      if (item) {
+        item.task = event.target.value
+      }
+      await itemsService.patchItem(id, item)
+      setItems([...items])
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   async function deleteItem(id) {
     try {
@@ -138,7 +153,6 @@ function Container(props) {
       completed: false,
       color: currentItem.color
     });
-
   }
 
   function getItemsColor() {
@@ -164,15 +178,6 @@ function Container(props) {
     }
   }
 
-  function handleCheck(id) {
-    const newItems = [...items];
-    const item = items.find((el) => el.id === id);
-    if (item) {
-      item.completed = !item.completed;
-    }
-    setItems(newItems);
-  }
-
   return (
       <div>
         <div id="main">
@@ -188,6 +193,7 @@ function Container(props) {
             <ItemsList
                 deleteItem={deleteItem}
                 handleCheck={handleCheck}
+                handleText={handleText}
                 items={items}
             />
             <InputForm

@@ -20,22 +20,22 @@ class ItemsService {
         });
   }
 
-  // patchItem(id, item) {
-  //   return axios.patch(`/items/${id}`, {
-  //     task: item.task,
-  //     completed: item.completed,
-  //   }, {
-  //     headers: {
-  //       'Authorization': `Bearer ${localStorage.getItem('token')}`
-  //     }
-  //   })
-  //       .then(res => {
-  //         return res.data;
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       });
-  // }
+  patchItem(id, item) {
+    return axios.patch(`/items/${id}`, {
+      task: item.task,
+      completed: item.completed,
+    }, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+        .then(res => {
+          return res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  }
 
   deleteItem(id) {
     return axios.delete(`/items/${id}`, {

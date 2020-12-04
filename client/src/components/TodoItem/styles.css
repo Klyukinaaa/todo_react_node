@@ -13,6 +13,8 @@ li {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border: none;
+    outline: none;
 }
 
 .task {
@@ -55,5 +57,6 @@ label, #check {
 .btn_delete:hover {
     color: #ffffff;
 }
+
 
 
