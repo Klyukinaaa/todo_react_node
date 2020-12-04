@@ -5,7 +5,7 @@ import ItemColor from '../ItemColor';
 import './styles.css';
 
 function ColorBtns(props) {
-  const { colors, handleClickColor, createItem } = props;
+  const { colors, handleClickColor } = props;
   const itemsColor = colors.map((item, index) => (
     <ItemColor
       click={item.selected}
@@ -13,7 +13,6 @@ function ColorBtns(props) {
       key={index}
       i={index}
       item={item}
-      createItem
     />
   ));
 
@@ -23,7 +22,7 @@ function ColorBtns(props) {
         {itemsColor}
       </div>
       <div className="text_btn">
-        <button onClick={createItem} type="submit" id="add">Add</button>
+        <button type={"submit"} id="add">Add</button>
       </div>
     </span>
   );

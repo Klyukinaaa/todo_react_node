@@ -11,7 +11,6 @@ function InputForm(props) {
     onChange,
     colors,
     handleClickColor,
-    createItem,
   } = props;
   return (
       <form id="text" onSubmit={handleSubmit}>
@@ -27,7 +26,6 @@ function InputForm(props) {
             />
           </label>
           <ColorBtns
-              createItem={createItem}
               colors={colors}
               handleClickColor={handleClickColor}
           />

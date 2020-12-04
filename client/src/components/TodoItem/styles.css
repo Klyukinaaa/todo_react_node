@@ -42,21 +42,18 @@ label, #check {
 }
 
 .btn_delete {
-    width: 55px;
-    height: 33px;
-    background: #4153d9;
+    color: #00000a;;
     border-radius: 2px;
     border: none;
-    color: #eaf2f5;
-    font-size: 13px;
+    font-size: 16px;
     cursor: pointer;
     outline: none;
     font-family: Natural, sans-serif;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .btn_delete:hover {
-    background-color: #293593;
+    color: #ffffff;
 }
 
 

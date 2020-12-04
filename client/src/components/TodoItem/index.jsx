@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { faTrash } from '@fortawesome/free-solid-svg-icons' ;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './styles.css';
 
@@ -23,7 +25,7 @@ function TodoItem(props) {
         </div>
           <label style={itemStyle} htmlFor={id} className="task">
             <span>{text}</span>
-            <button onClick={() => deleteItem(id)} className="btn_delete">delete</button>
+            <FontAwesomeIcon className="btn_delete" onClick={() => deleteItem(id)} icon={faTrash} />
           </label>
       </li>
   );

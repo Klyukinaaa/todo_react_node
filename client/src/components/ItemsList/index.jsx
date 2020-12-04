@@ -8,6 +8,7 @@ function ItemsList(props) {
   const { items, handleCheck, deleteItem } = props;
   const listItems = items.map((item) => (
     <TodoItem
+      key={item.id}
       color={item.color}
       check={item.completed}
       onclick={handleCheck}

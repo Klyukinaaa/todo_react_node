@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import ItemsList from '../ItemsList';
 import InputForm from '../InputForm';
-import axios from "axios";
+import ItemsService from "../../services/ItemsService";
 
 function Container(props) {
+  const itemsService = new ItemsService()
+
   const [colors, setColors] = useState([
     {
       backgroundColor: '#ef666c',
@@ -34,13 +36,60 @@ function Container(props) {
   ]);
 
   const [currentItem, setCurrentItem] = useState({
-    id: '',
     task: '',
     completed: false,
     color: '',
   });
 
   const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    async function requestItems() {
+      try {
+        const items = await itemsService.getItems();
+        setItems(items)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    requestItems();
+  }, [])
+
+
+  async function createItem() {
+    try {
+      const item = {
+        ...currentItem,
+        color: getItemsColor()
+      }
+      const data = await itemsService.createItem(item);
+      setItems([...items, data]);
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  // async function patchItem(id) {
+  //   try {
+  //       const item = {
+  //         task: currentItem.task,
+  //         completed: currentItem.completed
+  //       }
+  //       await itemsService.patchItem(id,item)
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
+  async function deleteItem(id) {
+    try {
+      await itemsService.deleteItem(id);
+      const newItems = items.filter(item => item.id !== id);
+      setItems(newItems);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   function handleClickColor(i) {
     const newColors = [...colors];
@@ -82,29 +131,36 @@ function Container(props) {
     ])
   }
 
-  function handleChange(event) {
-    const newColors = [...colors];
-    const activeCheckbox = newColors.find((item) => item.selected);
-    const activeColor = activeCheckbox ? activeCheckbox.backgroundColor : newColors[Math.floor(Math.random() * 6)].backgroundColor;
+
+  function handleTextInputChange(event) {
     setCurrentItem({
       task: event.target.value,
       completed: false,
-      id: Date.now(),
-      color: activeColor
+      color: currentItem.color
     });
+
   }
 
-  function handleSubmit(event) {
+  function getItemsColor() {
+    const activeCheckbox = colors.find((item) => item.selected);
+    return activeCheckbox ? activeCheckbox.backgroundColor : colors[Math.floor(Math.random() * 6)].backgroundColor;
+  }
+
+
+  async function handleSubmit(event) {
     event.preventDefault(); // отменим стандартное поведение браузера
     if (currentItem.task !== '') {
-      const newItems = [...items, currentItem];
-      setItems(newItems);
-      setCurrentItem({
-        task: '',
-        completed: false,
-        id: '',
-        color: ''
-      })
+      try {
+        await createItem()
+        setCurrentItem({
+          task: '',
+          completed: false,
+          id: '',
+          color: ''
+        })
+      } catch (e) {
+
+      }
     }
   }
 
@@ -116,53 +172,6 @@ function Container(props) {
     }
     setItems(newItems);
   }
-
-  function createItem() {
-    axios.post('/items/', {
-      task: currentItem.task,
-      completed: currentItem.completed,
-      color: currentItem.color
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-  }
-
-  useEffect(() => {
-    axios.get('/items/', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-        .then(res =>
-            setItems(res.data),
-        )
-        .catch(err => {
-          console.log(err);
-        });
-  }, [items.length])
-
-  function deleteItem(id) {
-    axios.delete(`/items/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-    })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-  }
-
 
   return (
       <div>
@@ -185,7 +194,7 @@ function Container(props) {
                 createItem={createItem}
                 handleSubmit={handleSubmit}
                 inputValue={currentItem.task}
-                onChange={handleChange}
+                onChange={handleTextInputChange}
                 colors={colors}
                 handleClickColor={handleClickColor}
             />
