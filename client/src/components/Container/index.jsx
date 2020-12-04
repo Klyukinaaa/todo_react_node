@@ -87,7 +87,7 @@ function Container(props) {
     try {
       const item = items.find((el) => el.id === id);
       if (item) {
-        item.task = event.target.value
+        item.task = event.target.defaultValue
       }
       await itemsService.patchItem(id, item)
       setItems([...items])

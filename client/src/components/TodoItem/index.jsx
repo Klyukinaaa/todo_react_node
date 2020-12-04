@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {faTrash} from '@fortawesome/free-solid-svg-icons' ;
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -10,6 +10,8 @@ function TodoItem(props) {
     text, check, onclick, id, color, deleteItem, handleText
   } = props;
 
+  const [showEdit, setShowEdit] = useState(false)
+
   const style = {
     backgroundColor: color,
   };
@@ -17,6 +19,15 @@ function TodoItem(props) {
     backgroundColor: '#b1b1b1',
   };
 
+  const handleDoubleClick = () => {
+    // show input
+    // set focus on input
+  }
+
+  const handleInputBlur = () => {
+    // update item
+    // hide input
+  }
   const itemStyle = check ? styleCheck : style;
   return (
       <li>
@@ -24,7 +35,15 @@ function TodoItem(props) {
           <input type="checkbox"/>
         </button>
         <div style={itemStyle} className="task">
-          <span onDoubleClick={() => handleText(id)}>{text}</span>
+          {
+            showEdit ?
+                <label>
+                  <input onBlur={() => setShowEdit(false)} type="text"
+                         defaultValue={text} autoFocus/>
+                </label>
+                : <span onDoubleClick={() => setShowEdit(true)}>{text}</span>
+          }
+
           <FontAwesomeIcon className="btn_delete" onClick={() => deleteItem(id)} icon={faTrash}/>
         </div>
       </li>

@@ -58,7 +58,7 @@ function Auth(props) {
   return (
       <Switch>
         {isAuth || localStorage.getItem('token')
-            ? <Route path="/items"  exact>
+            ? <Route path="/items">
               <Container logout={logout}/>
             </Route>
             : null}
