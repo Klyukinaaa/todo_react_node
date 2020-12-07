@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {faTrash} from '@fortawesome/free-solid-svg-icons' ;
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -19,15 +19,14 @@ function TodoItem(props) {
     backgroundColor: '#b1b1b1',
   };
 
-  const handleDoubleClick = () => {
-    // show input
-    // set focus on input
-  }
+  const textInput = useRef(null);
 
-  const handleInputBlur = () => {
-    // update item
-    // hide input
-  }
+  useEffect(() => {
+    if (showEdit) {
+      textInput.current && textInput.current.focus()
+    }
+  }, [showEdit])
+
   const itemStyle = check ? styleCheck : style;
   return (
       <li>
@@ -38,12 +37,15 @@ function TodoItem(props) {
           {
             showEdit ?
                 <label>
-                  <input onBlur={() => setShowEdit(false)} type="text"
-                         defaultValue={text} autoFocus/>
+                  <input style={itemStyle} onChange={(event) => handleText(id, event)}
+                         onBlur={() => setShowEdit(false)}
+                         value={text}
+                         ref={textInput}
+                         type="text"
+                         className="input_patch"/>
                 </label>
                 : <span onDoubleClick={() => setShowEdit(true)}>{text}</span>
           }
-
           <FontAwesomeIcon className="btn_delete" onClick={() => deleteItem(id)} icon={faTrash}/>
         </div>
       </li>

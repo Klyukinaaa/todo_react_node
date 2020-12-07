@@ -58,5 +58,22 @@ label, #check {
     color: #ffffff;
 }
 
+.input_patch {
+    color: #faf3fe;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    font-family: Natural, sans-serif;
+    justify-content: space-between;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.span:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+    border: 0;
+}
 
 

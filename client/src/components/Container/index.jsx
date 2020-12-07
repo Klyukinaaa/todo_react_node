@@ -70,11 +70,11 @@ function Container(props) {
     }
   }
 
-  async function handleCheck(id) {
+  async function handleCheck(id, event) {
     try {
       const item = items.find((el) => el.id === id);
       if (item) {
-        item.completed = !item.completed;
+        item.completed = !item.completed
       }
       await itemsService.patchItem(id, item)
       setItems([...items])
@@ -87,7 +87,7 @@ function Container(props) {
     try {
       const item = items.find((el) => el.id === id);
       if (item) {
-        item.task = event.target.defaultValue
+        item.task = event.target.value
       }
       await itemsService.patchItem(id, item)
       setItems([...items])
