@@ -70,7 +70,7 @@ function Container(props) {
     }
   }
 
-  async function handleCheck(id, event) {
+  async function handleCheck(id) {
     try {
       const item = items.find((el) => el.id === id);
       if (item) {
@@ -110,42 +110,14 @@ function Container(props) {
     const newColors = [...colors];
     setColors(newColors.map((item, index) => {
           const newItem = item;
-          newItem.selected = i === index;
+          if (i === index) {
+            newItem.selected = !newItem.selected
+          } else newItem.selected = i === index
           return newItem;
         }
         )
     );
   }
-
-  function removeClick() {
-    setColors([
-      {
-        backgroundColor: '#ef666c',
-        selected: false,
-      },
-      {
-        backgroundColor: '#f171a2',
-        selected: false,
-      },
-      {
-        backgroundColor: '#8f6ac8',
-        selected: false,
-      },
-      {
-        backgroundColor: '#5eb1f3',
-        selected: false,
-      },
-      {
-        backgroundColor: '#68d8e3',
-        selected: false,
-      },
-      {
-        backgroundColor: '#fde087',
-        selected: false,
-      },
-    ])
-  }
-
 
   function handleTextInputChange(event) {
     setCurrentItem({
@@ -193,8 +165,8 @@ function Container(props) {
             <ItemsList
                 deleteItem={deleteItem}
                 handleCheck={handleCheck}
-                handleText={handleText}
                 items={items}
+                handleText={handleText}
             />
             <InputForm
                 createItem={createItem}
@@ -204,8 +176,6 @@ function Container(props) {
                 colors={colors}
                 handleClickColor={handleClickColor}
             />
-            <div onClick={removeClick} className="remove">
-            </div>
           </div>
         </div>
       </div>

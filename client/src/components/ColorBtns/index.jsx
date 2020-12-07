@@ -8,7 +8,7 @@ function ColorBtns(props) {
   const { colors, handleClickColor } = props;
   const itemsColor = colors.map((item, index) => (
     <ItemColor
-      click={item.selected}
+      selected={item.selected}
       clickColor={handleClickColor}
       key={index}
       i={index}

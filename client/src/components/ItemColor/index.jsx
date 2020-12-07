@@ -5,10 +5,10 @@ import './styles.css';
 
 function ItemColor(props) {
   const {
-    i, item, clickColor, click
+    i, item, clickColor, selected
   } = props;
   return (
-    <span role="presentation" className={`btn ${click ? 'active' : ' '}`} onClick={() => clickColor(i)}>
+    <span role="presentation" className={`btn ${selected ? 'active' : ' '}`} onClick={() => clickColor(i)}>
       <input className="button" type="button" style={{ backgroundColor: item.backgroundColor }} />
     </span>
   );

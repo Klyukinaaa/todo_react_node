@@ -70,10 +70,15 @@ label, #check {
     padding: 0;
 }
 
-.span:active, :hover, :focus {
-    outline: 0;
-    outline-offset: 0;
+.input_patch:active {
     border: 0;
 }
 
+.input_patch:focus {
+    border: 0;
+}
+
+.input_patch:hover {
+    border: 0;
+}
 

@@ -30,9 +30,9 @@ function TodoItem(props) {
   const itemStyle = check ? styleCheck : style;
   return (
       <li>
-        <button onClick={() => onclick(id)} className="checkbox" style={itemStyle}>
-          <input type="checkbox"/>
-        </button>
+        <label htmlFor={id} className="checkbox" style={itemStyle}>
+          <input id={id} onClick={() => onclick(id)} type="checkbox"/>
+        </label>
         <div style={itemStyle} className="task">
           {
             showEdit ?
@@ -44,7 +44,7 @@ function TodoItem(props) {
                          type="text"
                          className="input_patch"/>
                 </label>
-                : <span onDoubleClick={() => setShowEdit(true)}>{text}</span>
+                : <span id="span_patch" onDoubleClick={() => setShowEdit(true)}>{text}</span>
           }
           <FontAwesomeIcon className="btn_delete" onClick={() => deleteItem(id)} icon={faTrash}/>
         </div>
