@@ -5,7 +5,7 @@ import Input from "../Input";
 
 import './styles.css';
 
-function Login(props) {
+function Register(props) {
   const {
     handleEmailChange,
     handlePasswordChange,
@@ -15,7 +15,6 @@ function Login(props) {
   } = props;
   return (
       <div id="main">
-
         <div id="lg">
           <div id="header">
             <NavLink to="/">
@@ -25,24 +24,43 @@ function Login(props) {
               <NavLink to="/auth/login" activeClassName="hurray">
                 <div id="log_btn">Login</div>
               </NavLink>
-              <NavLink to="/auth/register">
+              <NavLink to="/auth/register" activeClassName="hurray">
                 <div id="reg_btn">Register</div>
               </NavLink>
             </div>
           </div>
         </div>
         <div id="block-form">
-          <form id="form_login" action="">
-            <div className="title_form">Login</div>
+          <form id="form" action="">
+            <div className="title_form">Register</div>
             <div className="date_form">
-              <Input
-                  handleEmailChange={handleEmailChange}
-                  handlePasswordChange={handlePasswordChange}
-              />
+              <div>
+                <input
+                    className="date"
+                    type="email"
+                    name="email"
+                    placeholder="Email:"
+                    onChange={handleEmailChange}
+                />
+                <input
+                    className="date"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={handlePasswordChange}
+                />
+                <input
+                    className="date"
+                    type="password"
+                    name="password"
+                    placeholder="Repeat password"
+                    onChange={handlePasswordChange}
+                />
+              </div>
               <span className="error">{error}</span>
             </div>
             <div className="buttons">
-              <input className="btn_form" type="button" onClick={signIn} value="Login"/>
+              <input className="btn_form" type="button" onClick={signIn} value="Sign up"/>
             </div>
           </form>
         </div>
@@ -58,4 +76,4 @@ Input.propTypes = {
   signIn: PropTypes.func,
 };
 
-export default Login;
+export default Register;

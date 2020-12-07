@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
-import "./styles.css";
+import "../Login/styles.css";
 import axios from "axios";
 import Container from "../../components/Container";
 import Login from "../Login";
@@ -41,7 +41,7 @@ function Auth(props) {
     localStorage.removeItem('token');
   }
 
-  function signUp() {
+  function signUp(email, password) {
     axios.post('/register', {
       email: email,
       password: password
@@ -56,25 +56,13 @@ function Auth(props) {
   }
 
   return (
-      <Switch>
-        {isAuth || localStorage.getItem('token')
-            ? <Route path="/items">
-              <Container logout={logout}/>
-            </Route>
-            : null}
-        {isAuth
-            ? <Redirect to="/items"/>
-            : null}
-        <Route path='/'>
-          <Login
-              handleEmailChange={handleEmailChange}
-              handlePasswordChange={handlePasswordChange}
-              error={error}
-              signUp={signUp}
-              signIn={signIn}
-          />
-        </Route>
-      </Switch>
+      <Login
+          handleEmailChange={handleEmailChange}
+          handlePasswordChange={handlePasswordChange}
+          error={error}
+          signUp={signUp}
+          signIn={signIn}
+      />
   )
 }
 

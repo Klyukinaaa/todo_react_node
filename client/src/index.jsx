@@ -4,12 +4,12 @@ import {BrowserRouter as Router} from 'react-router-dom';
 
 import './index.css';
 import 'font-awesome/css/font-awesome.min.css';
-import Auth from "./screens/Auth";
+import {MainRouter} from "./mainRouter";
 
 export function App() {
   return (
       <Router>
-          <Auth/>
+          <MainRouter/>
       </Router>
   )
 }

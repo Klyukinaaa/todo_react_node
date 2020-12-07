@@ -18,7 +18,7 @@ ItemColor.propTypes = {
   i: PropTypes.number.isRequired,
   item: PropTypes.oneOfType([PropTypes.object]).isRequired,
   clickColor: PropTypes.func.isRequired,
-  click: PropTypes.bool.isRequired,
+  selected: PropTypes.bool.isRequired,
 };
 
 export default ItemColor;
