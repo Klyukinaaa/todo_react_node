@@ -33,7 +33,7 @@ function Register() {
         if (data) {
           setError(data)
         } else {
-          setError('Registration completed successfully. You can log in.')
+          history.push('/auth/login')
         }
       } catch (e) {
       }

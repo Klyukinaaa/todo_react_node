@@ -18,6 +18,7 @@ function ItemsList(props) {
           deleteItem={deleteItem}
       />
   ));
+
   return (
       <div>
         <ul className="todo item">

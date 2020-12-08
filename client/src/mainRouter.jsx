@@ -4,6 +4,7 @@ import Container from "./components/Container";
 import {AuthRouter} from "./routes/authRouter";
 import {AuthProvider} from "./context/authContext";
 import PrivateRoute from "./routes/secureRoutes";
+import Header from "./components/Header";
 
 export function MainRouter() {
   const [isAuth, setIsAuth] = useState(false);
@@ -12,14 +13,21 @@ export function MainRouter() {
     if (token !== null) {
       setIsAuth(true)
     }
-  }, [setIsAuth])
+  }, []);
 
+  console.log(isAuth)
   return (
       <AuthProvider value={{isAuth, setIsAuth}}>
+        <Header/>
         <Switch>
-          <PrivateRoute path="/auth" component={AuthRouter}/>
-          <Route path="/items" component={Container}/>
+          <Route path="/auth" component={AuthRouter}/>
+          <PrivateRoute path="/items" component={Container}/>
         </Switch>
       </AuthProvider>
   )
 }
+
+
+//TODO: 1. TOASTS
+//TODO: 2. REDIRECT TO LOGIN
+//TODO: 2. REDIRECT TO LOGIN

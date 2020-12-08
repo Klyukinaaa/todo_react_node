@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {NavLink} from "react-router-dom";
 import AuthService from "../../services/AuthSerice";
 import {useHistory} from 'react-router-dom';
 
 import './styles.css';
+import AuthContext from "../../context/authContext";
 
 function Login() {
   const authService = new AuthService();
   let history = useHistory();
+  const authContext = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +29,7 @@ function Login() {
       if (data) {
         setError(data)
       } else {
+        authContext.setIsAuth(true)
         history.push('/items')
       }
     } catch (e) {
@@ -39,6 +42,9 @@ function Login() {
           <div id="header">
             <NavLink to="/auth/login">
               <div id="logo">Todo</div>
+            </NavLink>
+            <NavLink to="/items" activeClassName="hurray">
+              <div id="log_btn">Items</div>
             </NavLink>
             <div id="login_btns">
               <NavLink to="/auth/login" activeClassName="hurray">

@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import ItemsList from '../ItemsList';
 import InputForm from '../InputForm';
 import ItemsService from "../../services/ItemsService";
 import {useHistory} from 'react-router-dom';
+import AuthContext from "../../context/authContext";
 
 function Container(props) {
   let history = useHistory();
@@ -42,6 +43,7 @@ function Container(props) {
     completed: false,
     color: '',
   });
+  const authContext = useContext(AuthContext);
 
   const [items, setItems] = useState([]);
 
@@ -153,6 +155,7 @@ function Container(props) {
   }
 
   function logout() {
+    authContext.setIsAuth(false)
     history.push('/auth/login')
     localStorage.removeItem('token');
   }
