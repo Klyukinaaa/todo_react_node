@@ -1,24 +1,38 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
-import Input from "../Input";
+import AuthService from "../../services/AuthSerice";
 
 import './styles.css';
 
-function Login(props) {
-  const {
-    handleEmailChange,
-    handlePasswordChange,
-    error,
-    signUp,
-    signIn,
-  } = props;
+function Login() {
+  const authService = new AuthService();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value)
+  }
+
+  function handlePasswordChange(e) {
+    setPassword(e.target.value)
+  }
+
+  async function signIn() {
+    const data = await authService.signIn(email, password);
+    try {
+      setError(data);
+    } catch (e) {
+
+    }
+  }
+
   return (
       <div id="main">
-
         <div id="lg">
           <div id="header">
-            <NavLink to="/">
+            <NavLink to="/auth/login">
               <div id="logo">Todo</div>
             </NavLink>
             <div id="login_btns">
@@ -35,10 +49,22 @@ function Login(props) {
           <form id="form_login" action="">
             <div className="title_form">Login</div>
             <div className="date_form">
-              <Input
-                  handleEmailChange={handleEmailChange}
-                  handlePasswordChange={handlePasswordChange}
-              />
+              <div>
+                <input
+                    className="date"
+                    type="email"
+                    name="email"
+                    placeholder="Email:"
+                    onChange={handleEmailChange}
+                />
+                <input
+                    className="date"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={handlePasswordChange}
+                />
+              </div>
               <span className="error">{error}</span>
             </div>
             <div className="buttons">
@@ -49,13 +75,5 @@ function Login(props) {
       </div>
   )
 }
-
-Input.propTypes = {
-  handleEmailChange: PropTypes.func.isRequired,
-  handlePasswordChange: PropTypes.func.isRequired,
-  error: PropTypes.string,
-  signUp: PropTypes.func,
-  signIn: PropTypes.func,
-};
 
 export default Login;

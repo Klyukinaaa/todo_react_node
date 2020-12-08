@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Switch, Route, Redirect} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import Container from "./components/Container";
 import {AuthRouter} from "./routes/authRouter";
 import {AuthProvider} from "./context/authContext";
@@ -12,8 +12,9 @@ export function MainRouter() {
     if (token !== null) {
       setIsAuth(true)
     }
-
   }, [setIsAuth])
+
+  console.log(isAuth)
 
   return (
       <AuthProvider value={{isAuth, setIsAuth}}>

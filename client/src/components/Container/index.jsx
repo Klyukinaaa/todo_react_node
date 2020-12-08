@@ -4,8 +4,7 @@ import InputForm from '../InputForm';
 import ItemsService from "../../services/ItemsService";
 
 function Container(props) {
-  console.log('rendered')
-  const itemsService = new ItemsService()
+  const itemsService = new ItemsService();
 
   const [colors, setColors] = useState([
     {

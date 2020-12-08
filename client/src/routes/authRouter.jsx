@@ -1,27 +1,33 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Route, Switch} from "react-router-dom";
-import AuthContext from "../context/authContext";
-import {useHistory} from 'react-router-dom';
-import PrivateRoute from "./secureRoutes";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 
-function MockComp() {
-  const authContext = useContext(AuthContext)
-  let history = useHistory();
-  const buttonStyle = {
-    width: 300,
-    height: 300
-  }
+export function AuthRouter({match}) {
   return (
-      <>
-        <p>{`Register rendered, context is ${authContext.isAuth}`}</p>
-        <button
-            style={buttonStyle}
-            onClick={() => history.goBack()}/>
-      </>
+      <Switch>
+        <Route exact path={`${match.path}/login`} component={Login}/>
+        <Route exact path={`${match.path}/register`} component={Register}/>
+      </Switch>
   )
 }
+
+// function MockComp() {
+//   const authContext = useContext(AuthContext)
+//   let history = useHistory();
+//   const buttonStyle = {
+//     width: 300,
+//     height: 300
+//   }
+//   return (
+//       <>
+//         <p>{`Register rendered, context is ${authContext.isAuth}`}</p>
+//         <button
+//             style={buttonStyle}
+//             onClick={() => history.goBack()}/>
+//       </>
+//   )
+// }
 
 // function Login() {
 //   console.log('rendered')
@@ -47,11 +53,3 @@ function MockComp() {
 //   )
 // }
 
-export function AuthRouter({match}) {
-  return (
-      <Switch>
-        <Route exact path={`${match.path}/login`} component={Login}/>
-        <Route exact path={`${match.path}/register`} component={Register}/>
-      </Switch>
-  )
-}
