@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 import AuthService from "../../services/AuthSerice";
+import {useHistory} from 'react-router-dom';
 
 import './styles.css';
 
 function Login() {
   const authService = new AuthService();
+  let history = useHistory();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,9 +24,12 @@ function Login() {
   async function signIn() {
     const data = await authService.signIn(email, password);
     try {
-      setError(data);
+      if (data) {
+        setError(data)
+      } else {
+        history.push('/items')
+      }
     } catch (e) {
-
     }
   }
 

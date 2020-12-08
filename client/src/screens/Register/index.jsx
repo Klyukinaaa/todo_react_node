@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 import AuthService from "../../services/AuthSerice";
+import {useHistory} from 'react-router-dom';
 
 import './styles.css';
 
 function Register() {
   const authService = new AuthService();
+  let history = useHistory();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,13 +30,18 @@ function Register() {
     if (password === repeatPassword) {
       const data = await authService.signUp(email, password);
       try {
-        setError(data);
+        if (data) {
+          setError(data)
+        } else {
+          setError('Registration completed successfully. You can log in.')
+        }
       } catch (e) {
       }
     } else {
       setError('Passwords do not match');
     }
   }
+
 
   return (
       <div id="main">

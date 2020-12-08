@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react';
 import ItemsList from '../ItemsList';
 import InputForm from '../InputForm';
 import ItemsService from "../../services/ItemsService";
+import {useHistory} from 'react-router-dom';
 
 function Container(props) {
+  let history = useHistory();
   const itemsService = new ItemsService();
 
   const [colors, setColors] = useState([
@@ -150,13 +152,18 @@ function Container(props) {
     }
   }
 
+  function logout() {
+    history.push('/auth/login')
+    localStorage.removeItem('token');
+  }
+
   return (
       <div>
         <div id="main">
           <div id="lg">
             <div id="header">
               <div id="logo">Todo</div>
-              <input onClick={props.logout} className="logout" type="button" value="Logout"/>
+              <input onClick={logout} className="logout" type="button" value="Logout"/>
             </div>
           </div>
         </div>

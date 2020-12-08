@@ -14,13 +14,11 @@ export function MainRouter() {
     }
   }, [setIsAuth])
 
-  console.log(isAuth)
-
   return (
       <AuthProvider value={{isAuth, setIsAuth}}>
         <Switch>
-          <PrivateRoute path="/items" component={Container}/>
-          <Route path="/auth" component={AuthRouter}/>
+          <PrivateRoute path="/auth" component={AuthRouter}/>
+          <Route path="/items" component={Container}/>
         </Switch>
       </AuthProvider>
   )
