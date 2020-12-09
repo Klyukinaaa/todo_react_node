@@ -1,5 +1,4 @@
 import React, {useState, useContext} from 'react';
-import {NavLink} from "react-router-dom";
 import AuthService from "../../services/AuthSerice";
 import {useHistory} from 'react-router-dom';
 
@@ -38,24 +37,6 @@ function Login() {
 
   return (
       <div id="main">
-        <div id="lg">
-          <div id="header">
-            <NavLink to="/auth/login">
-              <div id="logo">Todo</div>
-            </NavLink>
-            <NavLink to="/items" activeClassName="hurray">
-              <div id="log_btn">Items</div>
-            </NavLink>
-            <div id="login_btns">
-              <NavLink to="/auth/login" activeClassName="hurray">
-                <div id="log_btn">Login</div>
-              </NavLink>
-              <NavLink to="/auth/register">
-                <div id="reg_btn">Register</div>
-              </NavLink>
-            </div>
-          </div>
-        </div>
         <div id="block-form">
           <form id="form_login" action="">
             <div className="title_form">Login</div>

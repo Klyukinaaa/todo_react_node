@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {NavLink} from "react-router-dom";
 import AuthService from "../../services/AuthSerice";
 import {useHistory} from 'react-router-dom';
 
@@ -42,24 +41,8 @@ function Register() {
     }
   }
 
-
   return (
       <div id="main">
-        <div id="lg">
-          <div id="header">
-            <NavLink to="/auth/login">
-              <div id="logo">Todo</div>
-            </NavLink>
-            <div id="login_btns">
-              <NavLink to="/auth/login" activeClassName="hurray">
-                <div id="log_btn">Login</div>
-              </NavLink>
-              <NavLink to="/auth/register" activeClassName="hurray">
-                <div id="reg_btn">Register</div>
-              </NavLink>
-            </div>
-          </div>
-        </div>
         <div id="block-form">
           <form id="form" action="">
             <div className="title_form">Register</div>

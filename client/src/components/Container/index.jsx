@@ -2,11 +2,9 @@ import React, {useState, useEffect, useContext} from 'react';
 import ItemsList from '../ItemsList';
 import InputForm from '../InputForm';
 import ItemsService from "../../services/ItemsService";
-import {useHistory} from 'react-router-dom';
 import AuthContext from "../../context/authContext";
 
-function Container(props) {
-  let history = useHistory();
+function Container() {
   const itemsService = new ItemsService();
 
   const [colors, setColors] = useState([
@@ -56,7 +54,6 @@ function Container(props) {
         console.log(e)
       }
     }
-
     requestItems();
   }, [])
 
@@ -154,22 +151,8 @@ function Container(props) {
     }
   }
 
-  function logout() {
-    authContext.setIsAuth(false)
-    history.push('/auth/login')
-    localStorage.removeItem('token');
-  }
-
   return (
       <div>
-        <div id="main">
-          <div id="lg">
-            <div id="header">
-              <div id="logo">Todo</div>
-              <input onClick={logout} className="logout" type="button" value="Logout"/>
-            </div>
-          </div>
-        </div>
         <div id="container">
           <div className="page">
             <ItemsList
