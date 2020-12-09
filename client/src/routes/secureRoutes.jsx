@@ -16,3 +16,9 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 }
 
 export default PrivateRoute;
+
+
+//TODO: 1 - ESLINT
+//TODO: 2 - Home page redirect
+//TODO: 3 - PropTypes
+//TODO: 4 - Input Request onBlur +

@@ -1,15 +1,16 @@
 import React, {useState, useContext} from 'react';
-import AuthService from "../../services/AuthSerice";
 import {useHistory} from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import AuthService from "../../services/AuthSerice";
 import NotificationService from "../service";
+import AuthContext from "../../context/authContext";
 
 import './styles.css';
-import 'react-toastify/dist/ReactToastify.css';
-import AuthContext from "../../context/authContext";
+
 
 function Login() {
   const authService = new AuthService();
-  let history = useHistory();
+  const history = useHistory();
   const authContext = useContext(AuthContext);
 
   const [email, setEmail] = useState('');

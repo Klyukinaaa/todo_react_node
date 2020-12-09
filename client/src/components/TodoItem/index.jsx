@@ -31,15 +31,18 @@ function TodoItem(props) {
   return (
       <li>
         <label htmlFor={id} className="checkbox" style={itemStyle}>
-          <input id={id} onClick={() => onclick(id)} type="checkbox" checked={check}/>
+          <input id={id} onChange={() => onclick(id)} type="checkbox" checked={check}/>
         </label>
         <div style={itemStyle} className="task">
           {
             showEdit ?
                 <label>
-                  <input style={itemStyle} onChange={(event) => handleText(id, event)}
-                         onBlur={() => setShowEdit(false)}
-                         value={text}
+                  <input style={itemStyle}
+                         onBlur={
+                           (event) => handleText(id, event)
+                               && setShowEdit(false)
+                         }
+                         defaultValue={text}
                          ref={textInput}
                          type="text"
                          className="input_patch"/>
