@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import ItemsList from '../ItemsList';
 import InputForm from '../InputForm';
 import ItemsService from "../../services/ItemsService";
-import AuthContext from "../../context/authContext";
 
 function Container() {
   const itemsService = new ItemsService();
@@ -41,7 +40,6 @@ function Container() {
     completed: false,
     color: '',
   });
-  const authContext = useContext(AuthContext);
 
   const [items, setItems] = useState([]);
 

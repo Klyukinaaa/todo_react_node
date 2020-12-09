@@ -27,6 +27,5 @@ export function MainRouter() {
   )
 }
 
-
 //TODO: 1. TOASTS
-//TODO: 2. REDIRECT TO LOGIN
+

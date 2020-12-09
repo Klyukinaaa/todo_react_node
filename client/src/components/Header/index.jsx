@@ -32,7 +32,7 @@ function Header() {
             <NavLink to="/auth/login" activeClassName="hurray">
               <div id="log_btn">Login</div>
             </NavLink>
-            <NavLink to="/auth/register">
+            <NavLink to="/auth/register" activeClassName="hurray">
               <div id="reg_btn">Register</div>
             </NavLink>
           </div>
