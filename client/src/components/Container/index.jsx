@@ -75,8 +75,8 @@ function Container() {
       if (item) {
         item.completed = !item.completed
       }
-      await itemsService.patchItem(id, item)
-      setItems([...items])
+      await itemsService.patchItem(id, item);
+      setItems([...items]);
     } catch (e) {
       console.log(e)
     }

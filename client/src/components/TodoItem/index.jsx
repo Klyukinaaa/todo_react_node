@@ -31,7 +31,7 @@ function TodoItem(props) {
   return (
       <li>
         <label htmlFor={id} className="checkbox" style={itemStyle}>
-          <input id={id} onClick={() => onclick(id)} type="checkbox"/>
+          <input id={id} onClick={() => onclick(id)} type="checkbox" checked={check}/>
         </label>
         <div style={itemStyle} className="task">
           {

@@ -15,14 +15,17 @@ function Header() {
     localStorage.removeItem('token');
   }
 
-  if (authContext.isAuth) {
+
+  const HeaderForAuthenticated = () => {
     return (
         <div id="header">
           <div id="logo">Todo</div>
           <input onClick={logout} className="logout" type="button" value="Logout"/>
         </div>
     )
-  } else {
+  }
+
+  const AuthHeader = () => {
     return (
         <div id="header">
           <NavLink to="/auth/login">
@@ -39,6 +42,8 @@ function Header() {
         </div>
     );
   }
+
+  return authContext.isAuth ? <HeaderForAuthenticated/> : <AuthHeader/>
 }
 
 export default Header;

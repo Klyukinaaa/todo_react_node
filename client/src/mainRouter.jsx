@@ -5,6 +5,8 @@ import {AuthRouter} from "./routes/authRouter";
 import {AuthProvider} from "./context/authContext";
 import PrivateRoute from "./routes/secureRoutes";
 import Header from "./components/Header";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export function MainRouter() {
   const [isAuth, setIsAuth] = useState(false);
@@ -15,10 +17,10 @@ export function MainRouter() {
     }
   }, []);
 
-  console.log(isAuth)
   return (
       <AuthProvider value={{isAuth, setIsAuth}}>
         <Header/>
+        <ToastContainer/>
         <Switch>
           <Route path="/auth" component={AuthRouter}/>
           <PrivateRoute path="/items" component={Container}/>
@@ -26,6 +28,4 @@ export function MainRouter() {
       </AuthProvider>
   )
 }
-
-//TODO: 1. TOASTS
 
