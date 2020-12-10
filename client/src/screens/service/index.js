@@ -1,11 +1,10 @@
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class NotificationService {
-
   static error(data) {
     return toast.error(data, {
-      position: "top-right",
+      position: 'top-right',
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -17,7 +16,7 @@ class NotificationService {
 
   static success(message) {
     return toast.success(message, {
-      position: "top-right",
+      position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -26,7 +25,6 @@ class NotificationService {
       progress: undefined,
     });
   }
-
 }
 
 export default NotificationService;

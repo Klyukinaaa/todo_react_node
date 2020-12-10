@@ -1,16 +1,16 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {faTrash} from '@fortawesome/free-solid-svg-icons' ;
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './styles.css';
 
 function TodoItem(props) {
   const {
-    text, check, onclick, id, color, deleteItem, handleText
+    text, check, onclick, id, color, deleteItem, handleText,
   } = props;
 
-  const [showEdit, setShowEdit] = useState(false)
+  const [showEdit, setShowEdit] = useState(false);
 
   const style = {
     backgroundColor: color,
@@ -23,35 +23,39 @@ function TodoItem(props) {
 
   useEffect(() => {
     if (showEdit) {
-      textInput.current && textInput.current.focus()
+      textInput.current && textInput.current.focus();
     }
-  }, [showEdit])
+  }, [showEdit]);
 
   const itemStyle = check ? styleCheck : style;
   return (
-      <li>
-        <label htmlFor={id} className="checkbox" style={itemStyle}>
-          <input id={id} onChange={() => onclick(id)} type="checkbox" checked={check}/>
-        </label>
-        <div style={itemStyle} className="task">
-          {
-            showEdit ?
+    <li>
+      <label htmlFor={id} className="checkbox" style={itemStyle}>
+        <input id={id} onChange={() => onclick(id)} type="checkbox" checked={check} />
+      </label>
+      <div style={itemStyle} className="task">
+        {
+            showEdit
+              ? (
                 <label>
-                  <input style={itemStyle}
-                         onBlur={
+                  <input
+                    style={itemStyle}
+                    onBlur={
                            (event) => handleText(id, event)
                                && setShowEdit(false)
                          }
-                         defaultValue={text}
-                         ref={textInput}
-                         type="text"
-                         className="input_patch"/>
+                    defaultValue={text}
+                    ref={textInput}
+                    type="text"
+                    className="input_patch"
+                  />
                 </label>
-                : <span id="span_patch" onDoubleClick={() => setShowEdit(true)}>{text}</span>
+              )
+              : <span id="span_patch" onDoubleClick={() => setShowEdit(true)}>{text}</span>
           }
-          <FontAwesomeIcon className="btn_delete" onClick={() => deleteItem(id)} icon={faTrash}/>
-        </div>
-      </li>
+        <FontAwesomeIcon className="btn_delete" onClick={() => deleteItem(id)} icon={faTrash} />
+      </div>
+    </li>
   );
 }
 

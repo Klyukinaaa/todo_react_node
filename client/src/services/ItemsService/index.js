@@ -1,23 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
 
 class ItemsService {
-
   createItem(item) {
-  return axios.post('/items/', {
+    return axios.post('/items/', {
       task: item.task,
       completed: item.completed,
-      color: item.color
+      color: item.color,
     }, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
-        .then(res => {
-          return res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      .then((res) => res.data)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   patchItem(id, item) {
@@ -26,37 +23,33 @@ class ItemsService {
       completed: item.completed,
     }, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
-        .then(res => {
-          return res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      .then((res) => res.data)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   deleteItem(id) {
     return axios.delete(`/items/${id}`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-    })
+    });
   }
 
   getItems() {
     return axios.get('/items/', {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
-        .then(res => {
-          return res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      .then((res) => res.data)
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 

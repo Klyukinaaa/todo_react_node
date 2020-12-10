@@ -13,23 +13,23 @@ function InputForm(props) {
     handleClickColor,
   } = props;
   return (
-      <form id="text" onSubmit={handleSubmit}>
-          <label htmlFor="add" className="new_item">
-            <input
-                onChange={onChange}
-                value={inputValue}
-                id="new-task"
-                maxLength="100"
-                type="text"
-                size="35"
-                placeholder="Add New Item"
-            />
-          </label>
-          <ColorBtns
-              colors={colors}
-              handleClickColor={handleClickColor}
-          />
-      </form>
+    <form id="text" onSubmit={handleSubmit}>
+      <label htmlFor="add" className="new_item">
+        <input
+          onChange={onChange}
+          value={inputValue}
+          id="new-task"
+          maxLength="100"
+          type="text"
+          size="35"
+          placeholder="Add New Item"
+        />
+      </label>
+      <ColorBtns
+        colors={colors}
+        handleClickColor={handleClickColor}
+      />
+    </form>
   );
 }
 

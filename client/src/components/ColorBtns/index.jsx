@@ -22,7 +22,7 @@ function ColorBtns(props) {
         {itemsColor}
       </div>
       <div className="text_btn">
-        <button type={"submit"} id="add">Add</button>
+        <button type="submit" id="add">Add</button>
       </div>
     </span>
   );

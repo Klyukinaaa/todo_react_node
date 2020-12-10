@@ -1,36 +1,28 @@
-const {Sequelize} = require("sequelize");
+const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize("todo", "postgres", "user", {
-    dialect: "postgres",
-    define: {
-        timestamps: false
-    }
+const sequelize = new Sequelize('todo', 'postgres', 'user', {
+  dialect: 'postgres',
+  define: {
+    timestamps: false,
+  },
 });
 
-const User = require("./User")(sequelize);
-const Todo = require("./Todo")(sequelize);
+const User = require('./User')(sequelize);
+const Todo = require('./Todo')(sequelize);
 
-//внешний ключ
-User.hasMany(Todo, { foreignKey: "user"});
+// внешний ключ
+User.hasMany(Todo, { foreignKey: 'user' });
 
 module.exports = {
-    sequelize: sequelize,
-    user: User,
-    todo: Todo
-}
+  sequelize,
+  user: User,
+  todo: Todo,
+};
 
-//sync() синхронизирует структуру базы данных с определением моделей
-//если для какой-то модели отстуствует соотв. таблица в БД, то эта таблица создается
-//force удалить таблицы и создать их заново, но уже с нужной нам структурой
+// sync() синхронизирует структуру базы данных с определением моделей
+// если для какой-то модели отстуствует соотв. таблица в БД, то эта таблица создается
+// force удалить таблицы и создать их заново, но уже с нужной нам структурой
 sequelize.sync();
-
-
-
-
-
-
-
-
 
 // const config = require('config.json')('./config.json');
 // const {Client} = require('pg');
@@ -76,7 +68,3 @@ sequelize.sync();
 //     initialize,
 //     db
 // };
-
-
-
-

@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ItemsList from '../ItemsList';
 import InputForm from '../InputForm';
-import ItemsService from "../../services/ItemsService";
+import ItemsService from '../../services/ItemsService';
 
 function Container() {
   const itemsService = new ItemsService();
@@ -47,25 +47,24 @@ function Container() {
     async function requestItems() {
       try {
         const items = await itemsService.getItems();
-        setItems(items)
+        setItems(items);
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
     requestItems();
-  }, [])
-
+  }, []);
 
   async function createItem() {
     try {
       const item = {
         ...currentItem,
-        color: getItemsColor()
-      }
+        color: getItemsColor(),
+      };
       const data = await itemsService.createItem(item);
       setItems([...items, data]);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
@@ -73,12 +72,12 @@ function Container() {
     try {
       const item = items.find((el) => el.id === id);
       if (item) {
-        item.completed = !item.completed
+        item.completed = !item.completed;
       }
       await itemsService.patchItem(id, item);
       setItems([...items]);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
@@ -86,19 +85,19 @@ function Container() {
     try {
       const item = items.find((el) => el.id === id);
       if (item) {
-        item.task = event.target.value
+        item.task = event.target.value;
       }
-      await itemsService.patchItem(id, item)
-      setItems([...items])
+      await itemsService.patchItem(id, item);
+      setItems([...items]);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
   async function deleteItem(id) {
     try {
       await itemsService.deleteItem(id);
-      const newItems = items.filter(item => item.id !== id);
+      const newItems = items.filter((item) => item.id !== id);
       setItems(newItems);
     } catch (e) {
       console.log(e);
@@ -108,21 +107,19 @@ function Container() {
   function handleClickColor(i) {
     const newColors = [...colors];
     setColors(newColors.map((item, index) => {
-          const newItem = item;
-          if (i === index) {
-            newItem.selected = !newItem.selected
-          } else newItem.selected = i === index
-          return newItem;
-        }
-        )
-    );
+      const newItem = item;
+      if (i === index) {
+        newItem.selected = !newItem.selected;
+      } else newItem.selected = i === index;
+      return newItem;
+    }));
   }
 
   function handleTextInputChange(event) {
     setCurrentItem({
       task: event.target.value,
       completed: false,
-      color: currentItem.color
+      color: currentItem.color,
     });
   }
 
@@ -131,18 +128,17 @@ function Container() {
     return activeCheckbox ? activeCheckbox.backgroundColor : colors[Math.floor(Math.random() * 6)].backgroundColor;
   }
 
-
   async function handleSubmit(event) {
     event.preventDefault(); // отменим стандартное поведение браузера
     if (currentItem.task !== '') {
       try {
-        await createItem()
+        await createItem();
         setCurrentItem({
           task: '',
           completed: false,
           id: '',
-          color: ''
-        })
+          color: '',
+        });
       } catch (e) {
 
       }
@@ -150,26 +146,26 @@ function Container() {
   }
 
   return (
-      <div>
-        <div id="container">
-          <div className="page">
-            <ItemsList
-                deleteItem={deleteItem}
-                handleCheck={handleCheck}
-                items={items}
-                handleText={handleText}
-            />
-            <InputForm
-                createItem={createItem}
-                handleSubmit={handleSubmit}
-                inputValue={currentItem.task}
-                onChange={handleTextInputChange}
-                colors={colors}
-                handleClickColor={handleClickColor}
-            />
-          </div>
+    <div>
+      <div id="container">
+        <div className="page">
+          <ItemsList
+            deleteItem={deleteItem}
+            handleCheck={handleCheck}
+            items={items}
+            handleText={handleText}
+          />
+          <InputForm
+            createItem={createItem}
+            handleSubmit={handleSubmit}
+            inputValue={currentItem.task}
+            onChange={handleTextInputChange}
+            colors={colors}
+            handleClickColor={handleClickColor}
+          />
         </div>
       </div>
+    </div>
   );
 }
 
