@@ -8,7 +8,6 @@ import AuthContext from '../../context/authContext';
 import './styles.css';
 
 function Login() {
-  const authService = new AuthService();
   const history = useHistory();
   const authContext = useContext(AuthContext);
 
@@ -24,7 +23,7 @@ function Login() {
   }
 
   async function signIn() {
-    const data = await authService.signIn(email, password);
+    const data = await AuthService.signIn(email, password);
     try {
       if (data) {
         NotificationService.error(data);
@@ -33,6 +32,7 @@ function Login() {
         history.push('/items');
       }
     } catch (e) {
+      console.log(e);
     }
   }
 

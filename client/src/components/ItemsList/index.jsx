@@ -35,6 +35,8 @@ function ItemsList(props) {
 ItemsList.propTypes = {
   items: PropTypes.instanceOf(Array).isRequired,
   handleCheck: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  handleText: PropTypes.func.isRequired,
 };
 
 export default ItemsList;

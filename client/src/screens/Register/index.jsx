@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import AuthService from '../../services/AuthSerice';
-
-import './styles.css';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthService from '../../services/AuthSerice';
 import NotificationService from '../service';
 
+import './styles.css';
+
 function Register() {
-  const authService = new AuthService();
   const history = useHistory();
 
   const [email, setEmail] = useState('');
@@ -28,7 +27,7 @@ function Register() {
 
   async function signUp() {
     if (password === repeatPassword) {
-      const data = await authService.signUp(email, password);
+      const data = await AuthService.signUp(email, password);
       try {
         if (data) {
           NotificationService.error(data);
@@ -38,9 +37,11 @@ function Register() {
           history.push('/auth/login');
         }
       } catch (e) {
+        console.log(e);
       }
     } else {
-      console.log('пароли не совпадают');
+      const message = 'Passwords do not match!!';
+      NotificationService.error(message);
     }
   }
 

@@ -23,8 +23,9 @@ function TodoItem(props) {
 
   useEffect(() => {
     if (showEdit) {
-      textInput.current && textInput.current.focus();
+      return textInput.current && textInput.current.focus();
     }
+    return false;
   }, [showEdit]);
 
   const itemStyle = check ? styleCheck : style;
@@ -37,7 +38,7 @@ function TodoItem(props) {
         {
             showEdit
               ? (
-                <label>
+                <span>
                   <input
                     style={itemStyle}
                     onBlur={
@@ -49,7 +50,7 @@ function TodoItem(props) {
                     type="text"
                     className="input_patch"
                   />
-                </label>
+                </span>
               )
               : <span id="span_patch" onDoubleClick={() => setShowEdit(true)}>{text}</span>
           }
@@ -65,6 +66,8 @@ TodoItem.propTypes = {
   check: PropTypes.bool.isRequired,
   onclick: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  handleText: PropTypes.func.isRequired,
 };
 
 export default TodoItem;

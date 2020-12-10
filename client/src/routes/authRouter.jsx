@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
 import AuthContext from '../context/authContext';
 
-export function AuthRouter({ match }) {
+function AuthRouter({ match }) {
   const authContext = useContext(AuthContext);
 
   if (authContext.isAuth) {
@@ -17,3 +18,9 @@ export function AuthRouter({ match }) {
     </Switch>
   );
 }
+
+AuthRouter.propTypes = {
+  match: PropTypes.oneOfType([PropTypes.object]).isRequired,
+};
+
+export default AuthRouter;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class ItemsService {
-  createItem(item) {
+  static createItem(item) {
     return axios.post('/items/', {
       task: item.task,
       completed: item.completed,
@@ -17,7 +17,7 @@ class ItemsService {
       });
   }
 
-  patchItem(id, item) {
+  static patchItem(id, item) {
     return axios.patch(`/items/${id}`, {
       task: item.task,
       completed: item.completed,
@@ -32,7 +32,7 @@ class ItemsService {
       });
   }
 
-  deleteItem(id) {
+  static deleteItem(id) {
     return axios.delete(`/items/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -40,7 +40,7 @@ class ItemsService {
     });
   }
 
-  getItems() {
+  static getItems() {
     return axios.get('/items/', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,

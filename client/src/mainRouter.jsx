@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Container from './components/Container';
-import { AuthRouter } from './routes/authRouter';
+import AuthRouter from './routes/authRouter';
 import { AuthProvider } from './context/authContext';
 import PrivateRoute from './routes/secureRoutes';
 import Header from './components/Header';
-import 'react-toastify/dist/ReactToastify.css';
 import HomeRoute from './routes/homeRouter';
 
-export function MainRouter() {
+function MainRouter() {
   const [isAuth, setIsAuth] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -30,3 +30,5 @@ export function MainRouter() {
     </AuthProvider>
   );
 }
+
+export default MainRouter;

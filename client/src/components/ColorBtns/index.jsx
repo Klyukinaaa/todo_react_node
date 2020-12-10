@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import ItemColor from '../ItemColor';
 
@@ -10,7 +11,7 @@ function ColorBtns(props) {
     <ItemColor
       selected={item.selected}
       clickColor={handleClickColor}
-      key={index}
+      key={uuid()}
       i={index}
       item={item}
     />

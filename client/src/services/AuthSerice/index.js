@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class AuthService {
-  signIn(email, password) {
+  static signIn(email, password) {
     return axios.post('/login', {
       email,
       password,
@@ -12,7 +12,7 @@ class AuthService {
       .catch((err) => err.response.data.message);
   }
 
-  signUp(email, password) {
+  static signUp(email, password) {
     return axios.post('/register', {
       email,
       password,
